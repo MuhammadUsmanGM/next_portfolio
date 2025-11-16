@@ -717,7 +717,8 @@ header ul a:hover::after {
 .hero-buttons {
     display: flex;
     gap: 15px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allow wrapping by default for mobile */
+    justify-content: center; /* Center the buttons */
 }
 
 .hero-buttons .cv-btn {
@@ -735,6 +736,32 @@ header ul a:hover::after {
 }
 
 .hero-buttons .cv-btn:hover {
+    box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.5);
+}
+
+/* Desktop: Keep buttons on one line */
+@media screen and (min-width: 769px) {
+    .hero-buttons {
+        flex-wrap: nowrap; /* Prevent wrapping on desktop */
+    }
+}
+
+/* Style contact button to match CV buttons */
+.hero-buttons .contact-btn {
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: 1px solid rgba(var(--primary-rgb), 0.5);
+    background-color: #2200493d;
+    box-shadow: 0 0 5px rgba(var(--primary-rgb), 0.5);
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hero-buttons .contact-btn:hover {
     box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.5);
 }
 
