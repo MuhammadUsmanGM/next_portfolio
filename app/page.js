@@ -526,7 +526,7 @@ export default function Home() {
       <Skills />
 
       <section className="tech-stack-section" id="tech-stack">
-        <h1 className="section-title autoDisplay"><span className="gradient">Tech Stack</span> 🚀</h1>
+        <h1 className="section-title autoDisplay"><span className="gradient">My Tech Stack</span></h1>
         {/* Desktop: Original horizontal scrolling tech stack */}
         <div className="tech-scroll-container desktop-tech-stack">
           <div className="tech-scroll-wrapper">

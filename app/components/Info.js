@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default function Info() {
   return (
     <section className="info-section">
-      <h1 className="section-title autoDisplay"><span className="gradient">Hello, There</span> 👋</h1>
+      <h1 className="section-title autoDisplay"><span className="gradient">Get To Know Me</span></h1>
       <div className="info-cards">
         <div className="card">
           <h1>Hi there, I'm Muhammad Usman</h1>

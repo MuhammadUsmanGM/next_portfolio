@@ -78,7 +78,7 @@ export default function Projects() {
   return (
     <>
       <section className="my-project" id="projects">
-        <h1 className="section-title autoDisplay"><span className="gradient">My Projects</span> 👨‍💻</h1>
+        <h1 className="section-title autoDisplay"><span className="gradient">Featured Projects</span></h1>
 
         <div className="projects-container">
           <div className="project-wrapper">

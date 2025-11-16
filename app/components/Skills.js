@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default function Skills() {
   return (
     <section className="skills-section" id="skills">
-      <h1 className="section-title autoDisplay"><span className="gradient">My Skills</span> 💪</h1>
+      <h1 className="section-title autoDisplay"><span className="gradient">Technical Skills</span></h1>
       <div className="skills-container">
         <div className="skills-box autoDisplay">
           <div className="image-wrapper">

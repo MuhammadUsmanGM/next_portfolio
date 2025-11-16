@@ -6,7 +6,7 @@ export default function About() {
       data-aos="fade-up"
       data-aos-duration="1200"
     >
-      <h1 className="section-title autoDisplay "><span className="gradient">About Me</span> 👨‍💻</h1>
+      <h1 className="section-title autoDisplay "><span className="gradient">About Me</span></h1>
       <div className="about-content">
         <p className="about-tagline">
           Agentic AI & Web Developer crafting intelligent, autonomous, and user-centered digital experiences.
