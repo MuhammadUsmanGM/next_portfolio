@@ -1372,11 +1372,13 @@ header .cv-download-btn span {
 
 .project-info button{
     color: white;
-    padding: 14px 30px;
-    border-radius: 12px;
+    padding: 16px 32px;
+    border-radius: 15px;
     border: none;
-    background: linear-gradient(45deg, var(--primary), #6b9bd9);
-    box-shadow: 0 5px 15px rgba(114, 161, 222, 0.4);
+    background:
+        linear-gradient(145deg, #7e42a7, #a855f7);
+    box-shadow:
+        0 5px 15px rgba(126, 66, 167, 0.4);
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 600;
@@ -1388,12 +1390,19 @@ header .cv-download-btn span {
     display: flex;
     align-items: center;
     gap: 8px;
+    z-index: 1;
 }
 
 .project-info button:hover{
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(114, 161, 222, 0.6);
-    background: linear-gradient(45deg, #6b9bd9, var(--primary));
+    transform: translateY(-3px) scale(1.05);
+    box-shadow:
+        0 8px 20px rgba(126, 66, 167, 0.6);
+    background:
+        linear-gradient(145deg, #a855f7, #7e42a7);
+}
+
+.project-info button:active {
+    transform: translateY(-1px) scale(0.98);
 }
 
 .project-info button::before {
@@ -3722,38 +3731,65 @@ header .cv-download-btn span {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: linear-gradient(135deg, 
-        rgba(15, 23, 42, 0.6) 0%, 
-        rgba(30, 46, 82, 0.4) 100%);
-    border: 1px solid rgba(114, 161, 222, 0.4);
-    color: #e2e8f0;
+    background:
+        linear-gradient(145deg, #7e42a7, #a855f7);
+    color: white;
     font-size: 24px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border-radius: 18px; /* Changed to a more modern rounded square shape */
     cursor: pointer;
     z-index: 10;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2),
-                inset 0 0 10px rgba(114, 161, 222, 0.1);
+    box-shadow:
+        0 6px 20px rgba(126, 66, 167, 0.5),
+        0 4px 10px rgba(0, 0, 0, 0.2);
     /* Adjust position to not interfere with project content */
     margin-left: 10px;
     margin-right: 10px;
+    border: none;
+    outline: none;
 }
 
 .nav-btn:hover {
-    background: linear-gradient(135deg, 
-        rgba(114, 161, 222, 0.4) 0%, 
-        rgba(168, 85, 247, 0.3) 100%);
+    background:
+        linear-gradient(145deg, #a855f7, #7e42a7);
     color: white;
-    box-shadow: 0 0 20px rgba(114, 161, 222, 0.4),
-                inset 0 0 15px rgba(255, 255, 255, 0.2);
+    box-shadow:
+        0 10px 25px rgba(126, 66, 167, 0.7),
+        0 8px 20px rgba(0, 0, 0, 0.3);
     transform: translateY(-50%) scale(1.15);
-    border-color: rgba(114, 161, 222, 0.8);
+    border: none;
+}
+
+.nav-btn:active {
+    transform: translateY(-50%) scale(0.95);
+    box-shadow:
+        0 4px 15px rgba(126, 66, 167, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Add subtle glow effect on hover */
+.nav-btn::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(145deg, #7e42a7, #a855f7);
+    border-radius: 18px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    filter: blur(8px);
+}
+
+.nav-btn:hover::after {
+    opacity: 0.6;
 }
 
 /* Mobile-specific styles for nav buttons */
@@ -3764,31 +3800,38 @@ header .cv-download-btn span {
         bottom: 70px; /* Moved down further to prevent overlapping */
         transform: none;
         margin: 0;
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-        background: linear-gradient(135deg, 
-            rgba(15, 23, 42, 0.85) 0%, 
-            rgba(30, 46, 82, 0.7) 100%);
-        border: 1px solid rgba(114, 161, 222, 0.7);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3),
-                    inset 0 0 10px rgba(114, 161, 222, 0.2);
+        width: 50px;
+        height: 50px;
+        font-size: 22px;
+        background:
+            linear-gradient(145deg, #7e42a7, #a855f7);
+        color: white;
+        border-radius: 15px;
+        box-shadow:
+            0 6px 20px rgba(126, 66, 167, 0.5),
+            0 4px 10px rgba(0, 0, 0, 0.2);
         z-index: 20;
+        border: none;
+        outline: none;
     }
-    
+
     .nav-btn:hover {
+        background:
+            linear-gradient(145deg, #a855f7, #7e42a7);
         transform: scale(1.15); /* Remove translateY from transform */
-        box-shadow: 0 0 25px rgba(114, 161, 222, 0.5),
-                    inset 0 0 15px rgba(255, 255, 255, 0.2);
+        box-shadow:
+            0 10px 25px rgba(126, 66, 167, 0.7),
+            0 8px 20px rgba(0, 0, 0, 0.3);
     }
 }
 
 @media screen and (max-width: 480px) {
     .nav-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
         bottom: 15px;
+        border-radius: 12px; /* Maintain rounded square shape on small mobile */
     }
 }
 
@@ -3810,16 +3853,17 @@ header .cv-download-btn span {
 }
 
 .indicator {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background: rgba(168, 85, 247, 0.3); /* Darker purple for inactive */
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     border: 2px solid transparent;
     box-sizing: border-box;
     position: relative;
     z-index: 25;
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.3);
 }
 
 .indicator::before {
@@ -3827,19 +3871,25 @@ header .cv-download-btn span {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: transparent;
     transform: translate(-50%, -50%);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.indicator:hover {
+    background: rgba(168, 85, 247, 0.6);
+    transform: scale(1.3);
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
 }
 
 .indicator.active {
-    background: rgba(114, 161, 222, 0.6); /* Primary color with transparency */
-    box-shadow: 0 0 10px rgba(114, 161, 222, 0.6);
-    transform: scale(1.2);
-    border: 2px solid var(--primary);
+    background: linear-gradient(135deg, #7e42a7, #a855f7);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.8);
+    transform: scale(1.4);
+    border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .indicator.active::before {
@@ -4005,27 +4055,6 @@ header .cv-download-btn span {
         padding: 20px 20px 140px 20px;
     }
     
-    .nav-btn {
-        width: 46px;  /* Increased size for better touch accessibility */
-        height: 46px; /* Increased size for better touch accessibility */
-        font-size: 22px; /* Slightly increased for better visibility */
-        z-index: 20;
-        position: absolute; /* Use absolute positioning to keep buttons in place */
-        top: auto;
-        bottom: 85px; /* Positioned well below the content */
-        transform: none;
-        margin: 0;
-        background: linear-gradient(135deg, 
-            rgba(15, 23, 42, 0.85) 0%, 
-            rgba(30, 46, 82, 0.7) 100%);
-        border: 1px solid rgba(114, 161, 222, 0.7);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3),
-                    inset 0 0 10px rgba(114, 161, 222, 0.2);
-        border-radius: 50%; /* Make them more thumb-friendly */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
     
     .prev-btn {
         left: 15px; /* Positioned closer to the edge for thumb access */
@@ -4176,16 +4205,6 @@ header .cv-download-btn span {
         margin-right: 0;
     }
     
-    .nav-btn {
-        width: 44px;  /* Increased size for better touch accessibility */
-        height: 44px; /* Increased size for better touch accessibility */
-        font-size: 20px; /* Slightly increased for better visibility */
-        bottom: 85px; /* Positioned well below the content */
-        border-radius: 50%; /* Make them more thumb-friendly */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
     
     .prev-btn {
         left: 12px; /* Adjusted for small mobile */
