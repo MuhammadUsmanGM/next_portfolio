@@ -101,7 +101,51 @@ export default function Home() {
     { tech: "tailwindcss", src: "/images/tailwindcss.svg", name: "Tailwind CSS" }
   ];
   const itemsPerPage = 4; // Number of items to show per page on mobile
-  
+
+  // State for mobile tech stack carousel
+  const [currentTechIndex, setCurrentTechIndex] = useState(0);
+
+  // Touch handling state
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  // Function to get adjacent tech item indices with wrapping
+  const getCurrentIndex = (offset) => {
+    const newIndex = currentTechIndex + offset;
+
+    if (newIndex < 0) {
+      return techItems.length - 1; // Wrap to last item
+    } else if (newIndex >= techItems.length) {
+      return 0; // Wrap to first item
+    }
+    return newIndex;
+  };
+
+  // Touch handlers for swipe functionality
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50; // Minimum swipe distance for left
+    const isRightSwipe = distance < -50; // Minimum swipe distance for right
+
+    if (isLeftSwipe) {
+      // Swipe left - go to next item
+      setCurrentTechIndex(prev => prev < techItems.length - 1 ? prev + 1 : 0);
+    } else if (isRightSwipe) {
+      // Swipe right - go to previous item
+      setCurrentTechIndex(prev => prev > 0 ? prev - 1 : techItems.length - 1);
+    }
+  };
+
   // Auto-scroll to bottom of chat when messages change
   useEffect(() => {
     scrollToBottom();
@@ -752,33 +796,61 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Mobile: Horizontal tech stack with side navigation buttons */}
-        <div className="tech-mobile-container">
-          <div className="tech-mobile-wrapper">
-            <button className="tech-nav-btn tech-prev-btn" onClick={prevTechPage}>
-              <i className="bx bx-chevron-left"></i>
-            </button>
-            
-            <div className="tech-mobile-track" ref={techTrackRef}>
-              {/* First set - Original items */}
-              {techItems.map((item, index) => (
-                <div key={`original-${item.tech}-${index}`} className="tech-mobile-item" data-animation="slideInUp" data-delay={index * 50} data-duration="600" data-parallax="0.3">
-                  <Image src={item.src} alt={item.tech} loading="lazy" width={40} height={40}/>
-                  <span className="tech-name">{item.name}</span>
+        {/* Mobile Tech Stack - Center Card with Side Previews and Touch Swipe */}
+        <div
+          className="tech-stack-simple-container"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="tech-stack-simple-wrapper">
+            <div className="tech-stack-simple-track">
+              {/* Left Preview Card - Black and White */}
+              {techItems.length > 0 && (
+                <div className="tech-card-simple tech-card-left-simple">
+                  <Image
+                    src={techItems[getCurrentIndex(-1)].src}
+                    alt={techItems[getCurrentIndex(-1)].tech}
+                    width={40}
+                    height={40}
+                    style={{filter: 'grayscale(100%)'}}
+                  />
+                  <span className="tech-card-name">{techItems[getCurrentIndex(-1)].name}</span>
                 </div>
-              ))}
-              {/* Duplicate set - For seamless looping */}
-              {techItems.map((item, index) => (
-                <div key={`duplicate-${item.tech}-${index}`} className="tech-mobile-item" data-animation="slideInUp" data-delay={(index + techItems.length) * 50} data-duration="600" data-parallax="0.3">
-                  <Image src={item.src} alt={item.tech} loading="lazy" width={40} height={40}/>
-                  <span className="tech-name">{item.name}</span>
+              )}
+
+              {/* Center Main Card - Full Color */}
+              {techItems.length > 0 && (
+                <div className="tech-card-main-simple">
+                  <Image
+                    src={techItems[currentTechIndex].src}
+                    alt={techItems[currentTechIndex].tech}
+                    width={60}
+                    height={60}
+                  />
+                  <span className="tech-card-name">{techItems[currentTechIndex].name}</span>
                 </div>
-              ))}
+              )}
+
+              {/* Right Preview Card - Black and White */}
+              {techItems.length > 0 && (
+                <div className="tech-card-simple tech-card-right-simple">
+                  <Image
+                    src={techItems[getCurrentIndex(1)].src}
+                    alt={techItems[getCurrentIndex(1)].tech}
+                    width={40}
+                    height={40}
+                    style={{filter: 'grayscale(100%)'}}
+                  />
+                  <span className="tech-card-name">{techItems[getCurrentIndex(1)].name}</span>
+                </div>
+              )}
             </div>
-            
-            <button className="tech-nav-btn tech-next-btn" onClick={nextTechPage}>
-              <i className="bx bx-chevron-right"></i>
-            </button>
+
+            {/* Swipe Indicator */}
+            <div className="swipe-indicator">
+              <span>← Swipe →</span>
+            </div>
           </div>
         </div>
         
