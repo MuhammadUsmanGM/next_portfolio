@@ -77,14 +77,14 @@ export default function Projects() {
 
   return (
     <>
-      <section className="my-project" id="projects">
-        <h1 className="section-title autoDisplay"><span className="gradient">Featured Projects</span></h1>
+      <section className="my-project" id="projects" data-aos="fade-up" data-aos-duration="600">
+        <h1 className="section-title autoDisplay" data-aos="fade-up" data-aos-duration="600"><span className="gradient">Featured Projects</span></h1>
 
-        <div className="projects-container">
+        <div className="projects-container" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
           <div className="project-wrapper">
             <div className="project-slider" id="projectSlider">
               {/* Project 1 */}
-              <div className="project-card active">
+              <div className="project-card active" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
                 <div className="project-vidbox autoBlur">
                   <video
                     loop
@@ -124,7 +124,7 @@ export default function Projects() {
               </div>
 
               {/* Project 2 */}
-              <div className="project-card">
+              <div className="project-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
                 <div className="project-vidbox autoBlur">
                   <video
                     loop
@@ -166,7 +166,7 @@ export default function Projects() {
               </div>
 
               {/* Project 3 */}
-              <div className="project-card">
+              <div className="project-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="400">
                 <div className="project-vidbox autoBlur">
                   <video
                     loop

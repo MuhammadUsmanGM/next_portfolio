@@ -303,20 +303,39 @@ export function usePortfolio() {
     // Social links
     const updateSocialLinks = async () => {
       try {
-        const response = await fetch('/api/social');
-        const socialData = await response.json();
-        if (socialData.success && socialData.links) {
-          const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
-          emailLinks.forEach(link => link.href = `mailto:${socialData.links.email}`);
-          const githubLinks = document.querySelectorAll('a[href*="github.com"]');
-          githubLinks.forEach(link => {
-            link.href = socialData.links.github;
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-          });
+        // Add a small delay to ensure the API is ready to receive requests
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        const response = await fetch('/api/social', {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          // Add cache control for development
+          cache: 'no-cache'
+        });
+
+        // Check if the response is OK before parsing JSON
+        if (response.ok) {
+          const socialData = await response.json();
+          if (socialData.success && socialData.links) {
+            const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+            emailLinks.forEach(link => link.href = `mailto:${socialData.links.email}`);
+            const githubLinks = document.querySelectorAll('a[href*="github.com"]');
+            githubLinks.forEach(link => {
+              link.href = socialData.links.github;
+              link.target = '_blank';
+              link.rel = 'noopener noreferrer';
+            });
+          }
+        } else {
+          // If the API endpoint doesn't exist or returns an error, log a message but don't throw an error
+          console.log('Social links API not available, using default links');
         }
       } catch (error) {
-        console.error('Error fetching social links:', error);
+        // Handle network errors, JSON parsing errors, etc.
+        console.log('Social links API not available, using default links');
       }
     };
 

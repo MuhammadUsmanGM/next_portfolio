@@ -1,0 +1,199 @@
+/* Base animation styles */
+.animated {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease;
+}
+
+/* Keyframe animations for enhanced effects */
+.fadeIn {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.slideInUp {
+  animation: slideInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.slideInDown {
+  animation: slideInDown 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.slideInLeft {
+  animation: slideInLeft 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.slideInRight {
+  animation: slideInRight 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.zoomIn {
+  animation: zoomIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.flipIn {
+  animation: flipIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flipIn {
+  from {
+    transform: rotateY(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(0);
+    opacity: 1;
+  }
+}
+
+/* Progressive animation styles */
+.progressive-element {
+  transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+/* Parallax container */
+.parallax-container {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Animation delays */
+.delay-0 {
+  animation-delay: 0ms;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+.delay-600 {
+  animation-delay: 600ms;
+}
+
+.delay-700 {
+  animation-delay: 700ms;
+}
+
+.delay-800 {
+  animation-delay: 800ms;
+}
+
+.delay-900 {
+  animation-delay: 900ms;
+}
+
+/* Animation durations */
+.duration-300 {
+  animation-duration: 300ms;
+}
+
+.duration-500 {
+  animation-duration: 500ms;
+}
+
+.duration-600 {
+  animation-duration: 600ms;
+}
+
+.duration-800 {
+  animation-duration: 800ms;
+}
+
+.duration-1000 {
+  animation-duration: 1000ms;
+}
+
+/* Performance optimization */
+.animate-on-scroll {
+  will-change: transform, opacity;
+}
+
+/* Responsive considerations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -11,6 +11,7 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Sidebar from './components/Sidebar';
 import Contact from './components/Contact';
+import ScrollAnimations from './components/ScrollAnimations';
 
 // Function to convert URLs and emails in text to clickable links
 const convertUrlsToLinks = (text) => {
@@ -519,52 +520,52 @@ export default function Home() {
         ></video>
       </div>
 
-      <Hero />
-      <About />
-      <Info />
-      <Projects />
-      <Skills />
+      <Hero data-animation="slideInUp" data-delay="0" data-duration="600" />
+      <About data-animation="slideInUp" data-delay="100" data-duration="600"/>
+      <Info data-animation="slideInUp" data-delay="200" data-duration="600"/>
+      <Projects data-animation="slideInUp" data-delay="300" data-duration="600"/>
+      <Skills data-animation="slideInUp" data-delay="400" data-duration="600"/>
 
-      <section className="tech-stack-section" id="tech-stack">
+      <section className="tech-stack-section" id="tech-stack" data-animation="slideInUp" data-delay="500" data-duration="600">
         <h1 className="section-title autoDisplay"><span className="gradient">My Tech Stack</span></h1>
         {/* Desktop: Original horizontal scrolling tech stack */}
         <div className="tech-scroll-container desktop-tech-stack">
           <div className="tech-scroll-wrapper">
             <div className="tech-scroll-track" id="techScrollTrack">
               {/* First set */}
-              <div className="tech-item" data-tech="HTML5">
+              <div className="tech-item" data-tech="HTML5" data-animation="zoomIn" data-delay="0" data-duration="600">
                 <Image src="/images/html.svg" alt="HTML5" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">HTML5</span>
               </div>
-              <div className="tech-item" data-tech="CSS3">
+              <div className="tech-item" data-tech="CSS3" data-animation="zoomIn" data-delay="50" data-duration="600">
                 <Image src="/images/css.svg" alt="CSS3" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">CSS3</span>
               </div>
-              <div className="tech-item" data-tech="JavaScript">
+              <div className="tech-item" data-tech="JavaScript" data-animation="zoomIn" data-delay="100" data-duration="600">
                 <Image src="/images/js.png" alt="JavaScript" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">JavaScript</span>
               </div>
-              <div className="tech-item" data-tech="React">
+              <div className="tech-item" data-tech="React" data-animation="zoomIn" data-delay="150" data-duration="600">
                 <Image src="/images/react.svg" alt="React" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">React</span>
               </div>
-              <div className="tech-item" data-tech="Next.js">
+              <div className="tech-item" data-tech="Next.js" data-animation="zoomIn" data-delay="200" data-duration="600">
                 <Image src="/images/next.svg" alt="Next.js" loading="lazy" width={60} height={60}/>
                 <span className="tech-name">Next.js</span>
               </div>
-              <div className="tech-item" data-tech="Node.js">
+              <div className="tech-item" data-tech="Node.js" data-animation="zoomIn" data-delay="250" data-duration="600">
                 <Image src="/images/node.svg" alt="Node.js" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Node.js</span>
               </div>
-              <div className="tech-item" data-tech="MongoDB">
+              <div className="tech-item" data-tech="MongoDB" data-animation="zoomIn" data-delay="300" data-duration="600">
                 <Image src="/images/mongodb.svg" alt="MongoDB" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">MongoDB</span>
               </div>
-              <div className="tech-item" data-tech="Supabase">
+              <div className="tech-item" data-tech="Supabase" data-animation="zoomIn" data-delay="350" data-duration="600">
                 <Image src="/images/supaBase.png" alt="Supabase" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Supabase</span>
               </div>
-              <div className="tech-item" data-tech="Git">
+              <div className="tech-item" data-tech="Git" data-animation="zoomIn" data-delay="400" data-duration="600">
                 <Image
                   src="/images/git-svgrepo-com.svg"
                   alt="Git"
@@ -574,69 +575,69 @@ export default function Home() {
                 />
                 <span className="tech-name">Git</span>
               </div>
-              <div className="tech-item" data-tech="Python">
+              <div className="tech-item" data-tech="Python" data-animation="zoomIn" data-delay="450" data-duration="600">
                 <Image src="/images/python.svg" alt="Python" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Python</span>
               </div>
-              <div className="tech-item" data-tech="NPM">
+              <div className="tech-item" data-tech="NPM" data-animation="zoomIn" data-delay="500" data-duration="600">
                 <Image src="/images/npm.svg" alt="NPM" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">NPM</span>
               </div>
-              <div className="tech-item" data-tech="TypeScript">
+              <div className="tech-item" data-tech="TypeScript" data-animation="zoomIn" data-delay="550" data-duration="600">
                 <Image src="/images/openai.svg" alt="TypeScript" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">OpenAI SDK</span>
               </div>
-              <div className="tech-item" data-tech="Linux">
+              <div className="tech-item" data-tech="Linux" data-animation="zoomIn" data-delay="550" data-duration="600">
                 <Image src="/images/linux.svg" alt="Linux" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Linux</span>
               </div>
-              <div className="tech-item" data-tech="C++">
+              <div className="tech-item" data-tech="C++" data-animation="zoomIn" data-delay="600" data-duration="600">
                 <Image src="/images/cpp.svg" alt="C++" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">C++</span>
               </div>
-              <div className="tech-item" data-tech="github">
+              <div className="tech-item" data-tech="github" data-animation="zoomIn" data-delay="650" data-duration="600">
                 <Image src="/images/github.png" alt="github" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Github</span>
               </div>
-              <div className="tech-item" data-tech="tailwindcss">
+              <div className="tech-item" data-tech="tailwindcss" data-animation="zoomIn" data-delay="700" data-duration="600">
                 <Image src="/images/tailwindcss.svg" alt="tailwindcss" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Tailwind CSS</span>
               </div>
 
               {/* duplicate to see seamless flow */}
-              <div className="tech-item" data-tech="HTML5">
+              <div className="tech-item" data-tech="HTML5" data-animation="zoomIn" data-delay="0" data-duration="600">
                 <Image src="/images/html.svg" alt="HTML5" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">HTML5</span>
               </div>
-              <div className="tech-item" data-tech="CSS3">
+              <div className="tech-item" data-tech="CSS3" data-animation="zoomIn" data-delay="50" data-duration="600">
                 <Image src="/images/css.svg" alt="CSS3" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">CSS3</span>
               </div>
-              <div className="tech-item" data-tech="JavaScript">
+              <div className="tech-item" data-tech="JavaScript" data-animation="zoomIn" data-delay="100" data-duration="600">
                 <Image src="/images/js.png" alt="JavaScript" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">JavaScript</span>
               </div>
-              <div className="tech-item" data-tech="React">
+              <div className="tech-item" data-tech="React" data-animation="zoomIn" data-delay="150" data-duration="600">
                 <Image src="/images/react.svg" alt="React" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">React</span>
               </div>
-              <div className="tech-item" data-tech="Next.js">
+              <div className="tech-item" data-tech="Next.js" data-animation="zoomIn" data-delay="200" data-duration="600">
                 <Image src="/images/next.svg" alt="Next.js" loading="lazy" width={60} height={60}/>
                 <span className="tech-name">Next.js</span>
               </div>
-              <div className="tech-item" data-tech="Node.js">
+              <div className="tech-item" data-tech="Node.js" data-animation="zoomIn" data-delay="250" data-duration="600">
                 <Image src="/images/node.svg" alt="Node.js" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Node.js</span>
               </div>
-              <div className="tech-item" data-tech="MongoDB">
+              <div className="tech-item" data-tech="MongoDB" data-animation="zoomIn" data-delay="300" data-duration="600">
                 <Image src="/images/mongodb.svg" alt="MongoDB" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">MongoDB</span>
               </div>
-              <div className="tech-item" data-tech="Supabase">
+              <div className="tech-item" data-tech="Supabase" data-animation="zoomIn" data-delay="350" data-duration="600">
                 <Image src="/images/supaBase.png" alt="Supabase" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Supabase</span>
               </div>
-              <div className="tech-item" data-tech="Git">
+              <div className="tech-item" data-tech="Git" data-animation="zoomIn" data-delay="400" data-duration="600">
                 <Image
                   src="/images/git-svgrepo-com.svg"
                   alt="Git"
@@ -646,69 +647,69 @@ export default function Home() {
                 />
                 <span className="tech-name">Git</span>
               </div>
-              <div className="tech-item" data-tech="Python">
+              <div className="tech-item" data-tech="Python" data-animation="zoomIn" data-delay="450" data-duration="600">
                 <Image src="/images/python.svg" alt="Python" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Python</span>
               </div>
-              <div className="tech-item" data-tech="NPM">
+              <div className="tech-item" data-tech="NPM" data-animation="zoomIn" data-delay="500" data-duration="600">
                 <Image src="/images/npm.svg" alt="NPM" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">NPM</span>
               </div>
-              <div className="tech-item" data-tech="TypeScript">
+              <div className="tech-item" data-tech="TypeScript" data-animation="zoomIn" data-delay="550" data-duration="600">
                 <Image src="/images/openai.svg" alt="TypeScript" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">OpenAI Agent SDK</span>
               </div>
-              <div className="tech-item" data-tech="Linux">
+              <div className="tech-item" data-tech="Linux" data-animation="zoomIn" data-delay="550" data-duration="600">
                 <Image src="/images/linux.svg" alt="Linux" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Linux</span>
               </div>
-              <div className="tech-item" data-tech="C++">
+              <div className="tech-item" data-tech="C++" data-animation="zoomIn" data-delay="600" data-duration="600">
                 <Image src="/images/cpp.svg" alt="C++" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">C++</span>
               </div>
-              <div className="tech-item" data-tech="github">
+              <div className="tech-item" data-tech="github" data-animation="zoomIn" data-delay="650" data-duration="600">
                 <Image src="/images/github.png" alt="github" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Github</span>
               </div>
-              <div className="tech-item" data-tech="tailwindcss">
+              <div className="tech-item" data-tech="tailwindcss" data-animation="zoomIn" data-delay="700" data-duration="600">
                 <Image src="/images/tailwindcss.svg" alt="tailwindcss" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Tailwind CSS</span>
               </div>
 
               {/* Third set of items for seamless looping */}
-              <div className="tech-item" data-tech="HTML5">
+              <div className="tech-item" data-tech="HTML5" data-animation="zoomIn" data-delay="0" data-duration="600">
                 <Image src="/images/html.svg" alt="HTML5" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">HTML5</span>
               </div>
-              <div className="tech-item" data-tech="CSS3">
+              <div className="tech-item" data-tech="CSS3" data-animation="zoomIn" data-delay="50" data-duration="600">
                 <Image src="/images/css.svg" alt="CSS3" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">CSS3</span>
               </div>
-              <div className="tech-item" data-tech="JavaScript">
+              <div className="tech-item" data-tech="JavaScript" data-animation="zoomIn" data-delay="100" data-duration="600">
                 <Image src="/images/js.png" alt="JavaScript" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">JavaScript</span>
               </div>
-              <div className="tech-item" data-tech="React">
+              <div className="tech-item" data-tech="React" data-animation="zoomIn" data-delay="150" data-duration="600">
                 <Image src="/images/react.svg" alt="React" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">React</span>
               </div>
-              <div className="tech-item" data-tech="Next.js">
+              <div className="tech-item" data-tech="Next.js" data-animation="zoomIn" data-delay="200" data-duration="600">
                 <Image src="/images/next.svg" alt="Next.js" loading="lazy" width={60} height={60}/>
                 <span className="tech-name">Next.js</span>
               </div>
-              <div className="tech-item" data-tech="Node.js">
+              <div className="tech-item" data-tech="Node.js" data-animation="zoomIn" data-delay="250" data-duration="600">
                 <Image src="/images/node.svg" alt="Node.js" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Node.js</span>
               </div>
-              <div className="tech-item" data-tech="MongoDB">
+              <div className="tech-item" data-tech="MongoDB" data-animation="zoomIn" data-delay="300" data-duration="600">
                 <Image src="/images/mongodb.svg" alt="MongoDB" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">MongoDB</span>
               </div>
-              <div className="tech-item" data-tech="Supabase">
+              <div className="tech-item" data-tech="Supabase" data-animation="zoomIn" data-delay="350" data-duration="600">
                 <Image src="/images/supaBase.png" alt="Supabase" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Supabase</span>
               </div>
-              <div className="tech-item" data-tech="Git">
+              <div className="tech-item" data-tech="Git" data-animation="zoomIn" data-delay="400" data-duration="600">
                 <Image
                   src="/images/git-svgrepo-com.svg"
                   alt="Git"
@@ -718,31 +719,31 @@ export default function Home() {
                 />
                 <span className="tech-name">Git</span>
               </div>
-              <div className="tech-item" data-tech="Python">
+              <div className="tech-item" data-tech="Python" data-animation="zoomIn" data-delay="450" data-duration="600">
                 <Image src="/images/python.svg" alt="Python" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Python</span>
               </div>
-              <div className="tech-item" data-tech="NPM">
+              <div className="tech-item" data-tech="NPM" data-animation="zoomIn" data-delay="500" data-duration="600">
                 <Image src="/images/npm.svg" alt="NPM" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">NPM</span>
               </div>
-              <div className="tech-item" data-tech="TypeScript">
+              <div className="tech-item" data-tech="TypeScript" data-animation="zoomIn" data-delay="550" data-duration="600">
                 <Image src="/images/openai.svg" alt="TypeScript" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">OpenAI Agent SDK</span>
               </div>
-              <div className="tech-item" data-tech="Linux">
+              <div className="tech-item" data-tech="Linux" data-animation="zoomIn" data-delay="550" data-duration="600">
                 <Image src="/images/linux.svg" alt="Linux" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Linux</span>
               </div>
-              <div className="tech-item" data-tech="C++">
+              <div className="tech-item" data-tech="C++" data-animation="zoomIn" data-delay="600" data-duration="600">
                 <Image src="/images/cpp.svg" alt="C++" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">C++</span>
               </div>
-              <div className="tech-item" data-tech="github">
+              <div className="tech-item" data-tech="github" data-animation="zoomIn" data-delay="650" data-duration="600">
                 <Image src="/images/github.png" alt="github" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Github</span>
               </div>
-              <div className="tech-item" data-tech="tailwindcss">
+              <div className="tech-item" data-tech="tailwindcss" data-animation="zoomIn" data-delay="700" data-duration="600">
                 <Image src="/images/tailwindcss.svg" alt="tailwindcss" loading="lazy" width={50} height={50}/>
                 <span className="tech-name">Tailwind CSS</span>
               </div>
@@ -761,14 +762,14 @@ export default function Home() {
             <div className="tech-mobile-track" ref={techTrackRef}>
               {/* First set - Original items */}
               {techItems.map((item, index) => (
-                <div key={`original-${item.tech}-${index}`} className="tech-mobile-item">
+                <div key={`original-${item.tech}-${index}`} className="tech-mobile-item" data-animation="slideInUp" data-delay={index * 50} data-duration="600" data-parallax="0.3">
                   <Image src={item.src} alt={item.tech} loading="lazy" width={40} height={40}/>
                   <span className="tech-name">{item.name}</span>
                 </div>
               ))}
               {/* Duplicate set - For seamless looping */}
               {techItems.map((item, index) => (
-                <div key={`duplicate-${item.tech}-${index}`} className="tech-mobile-item">
+                <div key={`duplicate-${item.tech}-${index}`} className="tech-mobile-item" data-animation="slideInUp" data-delay={(index + techItems.length) * 50} data-duration="600" data-parallax="0.3">
                   <Image src={item.src} alt={item.tech} loading="lazy" width={40} height={40}/>
                   <span className="tech-name">{item.name}</span>
                 </div>
@@ -781,7 +782,7 @@ export default function Home() {
           </div>
         </div>
         
-        <div className="tech-description-container">
+        <div className="tech-description-container" data-animation="fadeInUp" data-duration="800" data-delay="1000">
           <h2 className="tech-subtitle">Technologies I Work With</h2>
           <p className="tech-description">
             Passionate about working with{' '}
@@ -794,14 +795,14 @@ export default function Home() {
 
       <Contact />
 
-      <footer className="main-footer">
+      <footer className="main-footer" data-animation="fadeInUp" data-duration="800" data-delay="200">
         <div className="footer-content">
           <div className="footer-info">
-            <h3 className="footer-logo">Muhammad Usman</h3>
-            <p className="footer-tagline">Agentic AI Developer & UI/UX Specialist</p>
+            <h3 className="footer-logo" data-animation="slideInUp" data-duration="800" data-delay="400">Muhammad Usman</h3>
+            <p className="footer-tagline" data-animation="slideInUp" data-duration="800" data-delay="600">Agentic AI Developer & UI/UX Specialist</p>
           </div>
-          
-          <div className="footer-links">
+
+          <div className="footer-links" data-animation="fadeInUp" data-duration="800" data-delay="800">
             <div className="footer-column">
               <h4>Navigation</h4>
               <ul>
@@ -850,8 +851,8 @@ export default function Home() {
             
           </div>
         </div>
-        
-        <div className="footer-bottom">
+
+        <div className="footer-bottom" data-animation="fadeInUp" data-duration="800" data-delay="1000">
           <p>©️ {new Date().getFullYear()} Muhammad Usman. All rights reserved.</p>
           <div className="social-links">
             <a href="mailto:mu.ai.dev@gmail.com" aria-label="Email">
@@ -956,7 +957,7 @@ export default function Home() {
     )}
 
     {/* Chatbot Icon - Fixed to bottom right */}
-    <div className={`chatbot-container ${chatbotMode === 'corner' ? 'chatbot-corner' : ''}`}>
+    <div className={`chatbot-container ${chatbotMode === 'corner' ? 'chatbot-corner' : ''}`} data-animation="bounceIn" data-duration="800" data-delay="400">
       {showChatbotToggle ? (
         <button className="chatbot-toggle-btn" onClick={showChatbot}>
           <img src="/bot.png" alt="Chat with Usman's assistant" width={80} height={80} />
@@ -976,8 +977,8 @@ export default function Home() {
                 <div className="sleeping-z-pattern z3">Z</div>
               </>
             )}
-            <button 
-              className={`chatbot-icon-btn ${chatbotMode === 'corner' ? 'chatbot-corner-btn' : ''}`} 
+            <button
+              className={`chatbot-icon-btn ${chatbotMode === 'corner' ? 'chatbot-corner-btn' : ''}`}
               onClick={openChat}
               onMouseEnter={() => {
                 if (chatbotMode === 'corner') {
@@ -996,6 +997,8 @@ export default function Home() {
         </>
       )}
     </div>
+
+    <ScrollAnimations />
 
     </div>
   )

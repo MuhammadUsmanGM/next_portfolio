@@ -75,16 +75,16 @@ export default function Contact() {
   };
 
   return (
-    <section className="contact-section" id="contact">
-      <h1 className="section-title"><span className="gradient">Let's Talk</span> 😊</h1>
+    <section className="contact-section" id="contact" data-aos="fade-up" data-aos-duration="600">
+      <h1 className="section-title" data-aos="fade-up" data-aos-duration="600"><span className="gradient">Let's Talk</span> 😊</h1>
 
-      <div className="contact-intro">
+      <div className="contact-intro" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
         <p className="contact-intro-text">
           Whether you're building a new web experience, enhancing your current platform, or exploring AI-powered projects, I'm here to help make it happen.
         </p>
       </div>
 
-      <div className="social-box">
+      <div className="social-box" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
         <a href="tel:+923256550687">
           <i className="bx bxs-phone"></i> +92 325 6550687
         </a>
@@ -102,7 +102,7 @@ export default function Contact() {
         </a>
       </div>
 
-      <div className="contact-box">
+      <div className="contact-box" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
         <h2 className="contact-form-title">Let's Connect</h2>
         <form id="contactForm" onSubmit={handleSubmit} noValidate>
           <div className="input-container">
