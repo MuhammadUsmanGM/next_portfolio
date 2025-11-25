@@ -1986,6 +1986,20 @@ header .cv-download-btn span {
     border-radius: 8px;
     transition: all 0.3s ease;
     width: fit-content; /* Only take width needed for content */
+    position: relative;
+}
+
+.social-box a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #72a1de, #a855f7);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    border-radius: 2px;
 }
 
 .social-box a:hover {
@@ -1993,6 +2007,10 @@ header .cv-download-btn span {
     background: rgba(114, 161, 222, 0.1);
     box-shadow: 0 5px 15px rgba(114, 161, 222, 0.2);
     /* Removed transform so it doesn't move when hovered */
+}
+
+.social-box a:hover::after {
+    width: 100%;
 }
 
 .social-box i{
