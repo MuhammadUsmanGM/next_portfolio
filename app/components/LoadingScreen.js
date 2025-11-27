@@ -75,6 +75,18 @@ export default function LoadingScreen({ onComplete }) {
     return null;
   }
 
+  // Define loading messages that correspond to progress stages
+  const getLoadingMessage = (currentProgress) => {
+    if (currentProgress < 10) return "Preparing journey...";
+    if (currentProgress < 17) return "Initializing experience...";
+    if (currentProgress < 38) return "Loading portfolio assets...";
+    if (currentProgress < 60) return "Optimizing resources...";
+    if (currentProgress < 78) return "Preparing interface...";
+    if (currentProgress < 89) return "Finalizing details...";
+    if (currentProgress < 95) return "Almost ready...";
+    return "Welcome to my world!";
+  };
+
   return (
     <div className="fixed inset-0 z-50">
       {/* Loading Screen */}
@@ -83,8 +95,35 @@ export default function LoadingScreen({ onComplete }) {
           !isLoading ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       >
-        {/* Animated background particles */}
+        {/* Enhanced cosmic background with parallax effect */}
         <div className="absolute inset-0 overflow-hidden">
+          {/* Distant stars background */}
+          {[...Array(150)].map((_, i) => {
+            const left = (i * 37) % 100;
+            const top = (i * 29) % 100;
+            const size = Math.random() * 1.5 + 0.5;
+            const delay = (i * 13) % 15;
+            const duration = (i * 7) % 5 + 5;
+            const opacity = Math.random() * 0.7 + 0.3;
+
+            return (
+              <div
+                key={`star-${i}`}
+                className="absolute bg-white rounded-full"
+                style={{
+                  left: left + '%',
+                  top: top + '%',
+                  width: size + 'px',
+                  height: size + 'px',
+                  opacity: opacity,
+                  animation: `twinkle ${duration}s infinite`,
+                  animationDelay: `${delay}s`,
+                }}
+              />
+            );
+          })}
+
+          {/* Middle layer cosmic particles */}
           {[...Array(20)].map((_, i) => {
             // Use consistent random values based on index to avoid hydration errors
             const width = (i * 17) % 100 + 150;
@@ -96,8 +135,8 @@ export default function LoadingScreen({ onComplete }) {
 
             return (
               <div
-                key={i}
-                className="absolute rounded-full bg-blue-500 opacity-10"
+                key={`particle-${i}`}
+                className="absolute rounded-full opacity-10"
                 style={{
                   width: width + 'px',
                   height: height + 'px',
@@ -105,7 +144,41 @@ export default function LoadingScreen({ onComplete }) {
                   top: top + '%',
                   animation: `float ${duration}s ease-in-out infinite`,
                   animationDelay: `${delay}s`,
+                  background: i % 3 === 0 ? 'radial-gradient(circle, rgba(59, 130, 246, 0.6), transparent 70%)' :
+                              i % 3 === 1 ? 'radial-gradient(circle, rgba(6, 182, 212, 0.6), transparent 70%)' :
+                                          'radial-gradient(circle, rgba(139, 92, 246, 0.6), transparent 70%)',
                   filter: 'blur(40px)',
+                  transform: `translateZ(${(i % 3) * -10}px)`, // Parallax effect
+                }}
+              />
+            );
+          })}
+
+          {/* Distant nebula effects */}
+          {[...Array(5)].map((_, i) => {
+            const size = 300 + (i * 100);
+            const left = (i * 41) % 100;
+            const top = (i * 33) % 100;
+            const duration = 20 + (i * 5);
+            const delay = i * 3;
+
+            return (
+              <div
+                key={`nebula-${i}`}
+                className="absolute rounded-full opacity-5"
+                style={{
+                  width: size + 'px',
+                  height: size + 'px',
+                  left: left + '%',
+                  top: top + '%',
+                  background: `radial-gradient(circle,
+                    ${i % 3 === 0 ? 'rgba(59, 130, 246, 0.3)' :
+                      i % 3 === 1 ? 'rgba(6, 182, 212, 0.3)' :
+                                   'rgba(139, 92, 246, 0.3)'},
+                    transparent 70%)`,
+                  filter: 'blur(80px)',
+                  animation: `float ${duration}s ease-in-out infinite`,
+                  animationDelay: `${delay}s`,
                 }}
               />
             );
@@ -114,36 +187,83 @@ export default function LoadingScreen({ onComplete }) {
 
         <div className="relative z-10 flex flex-col items-center">
           <div className="relative mb-12 animate-pulse-slow">
-            <div className="absolute inset-0 blur-3xl opacity-60 bg-cyan-400 rounded-full scale-150 animate-glow"></div>
-            <div className="absolute inset-0 blur-2xl opacity-80 bg-blue-400 rounded-full scale-125 animate-glow-delayed"></div>
-            
-            <img 
-              src="/loading.png" 
-              alt="MU Logo"
-              className="relative w-64 h-64 object-contain drop-shadow-2xl animate-float"
+            {/* Glow effects around the logo */}
+            <div className="absolute inset-0 blur-3xl opacity-40 bg-cyan-400 rounded-full scale-150 animate-glow"></div>
+            <div className="absolute inset-0 blur-2xl opacity-60 bg-blue-400 rounded-full scale-125 animate-glow-delayed"></div>
+
+            {/* Interactive logo that responds to mouse movement */}
+            <div
+              className="relative w-64 h-64 object-contain drop-shadow-2xl animate-float cursor-pointer transition-transform duration-100 ease-out"
               style={{
                 filter: 'drop-shadow(0 0 30px rgba(96, 165, 250, 0.8)) drop-shadow(0 0 60px rgba(56, 189, 248, 0.6))',
               }}
-            />
-          </div>
+              onMouseMove={(e) => {
+                const container = e.currentTarget;
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
 
-          <div className="w-80 h-1.5 bg-slate-800 rounded-full overflow-hidden backdrop-blur-sm">
-            <div 
-              className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 rounded-full transition-all duration-300 ease-out relative"
-              style={{ width: `${progress}%` }}
+                // Apply subtle movement based on mouse position
+                const xMovement = ((x / rect.width) - 0.5) * 10;
+                const yMovement = ((y / rect.height) - 0.5) * 10;
+
+                container.style.transform = `translate(${xMovement}px, ${yMovement}px) scale(1.05)`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translate(0px, 0px) scale(1)';
+              }}
             >
-              <div className="absolute inset-0 bg-white opacity-30 animate-shimmer"></div>
+              <img
+                src="/loading.png"
+                alt="MU Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
 
-          <div className="mt-2 text-cyan-400 text-sm font-mono">
-            {Math.round(progress)}%
+          {/* Enhanced progress bar with multi-stage visualization */}
+          <div className="w-80 h-3 bg-slate-900 rounded-full overflow-hidden backdrop-blur-sm mb-2 relative border border-slate-700/50 shadow-lg">
+            <div
+              className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-full transition-all duration-300 ease-out relative overflow-hidden"
+              style={{ width: `${progress}%` }}
+            >
+              {/* Animated gradient flow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-40 animate-shimmer"></div>
+
+              {/* Progress particles moving along the bar */}
+              {Array.from({ length: Math.floor(progress / 10) }).map((_, idx) => (
+                <div
+                  key={idx}
+                  className="absolute w-1 h-1 bg-white rounded-full"
+                  style={{
+                    top: '50%',
+                    left: `${(idx * 10) + 5}%`,
+                    transform: 'translate(-50%, -50%)',
+                    animation: `twinkle ${1 + Math.random() * 2}s infinite`,
+                    animationDelay: `${Math.random() * 2}s`
+                  }}
+                />
+              ))}
+
+              {/* Gradient highlight */}
+              <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white/40 to-transparent"></div>
+            </div>
+          </div>
+
+          {/* Progress percentage and status message */}
+          <div className="flex flex-col items-center">
+            <div className="text-cyan-400 text-lg font-mono mb-1">
+              {Math.round(progress)}%
+            </div>
+            <div className="text-slate-300 text-sm italic">
+              {getLoadingMessage(progress)}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Welcome Screen */}
-      <div 
+      <div
         className={`absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 flex items-center justify-center overflow-hidden transition-all duration-1000 ${
           showWelcome ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
@@ -156,7 +276,7 @@ export default function LoadingScreen({ onComplete }) {
 
         {/* Animated particles */}
         <div className="absolute inset-0 overflow-hidden">
-          {[...Array(30)].map((_, i) => {
+          {[...Array(50)].map((_, i) => {
             // Use consistent random values based on index to avoid hydration errors
             const left = (i * 41) % 100;
             const top = (i * 33) % 100;
