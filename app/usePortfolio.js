@@ -647,11 +647,5 @@ export function usePortfolio() {
     initProjectCarousel();
     createCustomScrollbar();
     
-    const loadingScreen = document.getElementById('loading-screen');
-    if (loadingScreen) {
-      setTimeout(() => {
-        loadingScreen.style.display = 'none';
-      }, 500);
-    }
   }, []);
 }

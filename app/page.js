@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePortfolio } from './usePortfolio';
+import LoadingScreen from './components/LoadingScreen';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -67,7 +68,7 @@ const convertUrlsToLinks = (text) => {
   return processedParts.flat();
 };
 
-export default function Home() {
+function HomeContent() {
   const [activeModal, setActiveModal] = useState(null);
   const [activeChat, setActiveChat] = useState(false);
   const [chatInput, setChatInput] = useState('');
@@ -1074,4 +1075,30 @@ export default function Home() {
 
     </div>
   )
+}
+
+// Main Home component wrapped in loading screen
+export default function WrappedHome() {
+  const [showContent, setShowContent] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    // Set isClient to true on mount to ensure we're on the client
+    setIsClient(true);
+  }, []);
+
+  const handleLoadingComplete = () => {
+    setShowContent(true);
+  };
+
+  if (!isClient) {
+    // Render nothing on the server or initially on client
+    return <div className="fixed inset-0 z-50 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950" />;
+  }
+
+  if (!showContent) {
+    return <LoadingScreen onComplete={handleLoadingComplete} />;
+  }
+
+  return <HomeContent />;
 }
