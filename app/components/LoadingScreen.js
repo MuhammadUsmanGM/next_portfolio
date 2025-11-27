@@ -13,42 +13,60 @@ export default function LoadingScreen({ onComplete }) {
       const minLoadTime = 5000;
       const startTime = Date.now();
 
-      const resources = [
-        new Promise(resolve => setTimeout(resolve, 800)),
-        new Promise(resolve => setTimeout(resolve, 1200)),
-        new Promise(resolve => setTimeout(resolve, 1600)),
-        new Promise(resolve => setTimeout(resolve, 2000)),
-      ];
+      // Define the specific progress sequence
+      const progressSequence = [10, 17, 38, 60, 78, 89, 95, 100];
+      let currentStep = 0;
 
-      const progressInterval = setInterval(() => {
-        setProgress(prev => {
-          if (prev >= 95) return prev;
-          return prev + Math.random() * 15;
-        });
-      }, 300);
+      // Set the initial progress
+      setProgress(10);
 
-      Promise.all(resources).then(() => {
+      // Schedule the progress updates at specific intervals
+      let cumulativeTime = 500; // Start after initial 10%
+      const progressTimers = [];
+
+      for (let i = 1; i < progressSequence.length; i++) {
+        // Vary the intervals to make the progression feel natural
+        const interval = (i === 1) ? 500 :  // 10 to 17
+                        (i === 2) ? 700 :  // 17 to 38
+                        (i === 3) ? 1200 :  // 38 to 60 (takes longer for real resources to load)
+                        (i === 4) ? 600 :  // 60 to 78
+                        (i === 5) ? 500 :  // 78 to 89
+                        (i === 6) ? 400 :  // 89 to 95
+                        600;               // 95 to 100
+
+        const timer = setTimeout(() => {
+          setProgress(progressSequence[i]);
+          currentStep = i;
+        }, cumulativeTime);
+
+        progressTimers.push(timer);
+        cumulativeTime += interval;
+      }
+
+      // At the end of the sequence, show the welcome screen
+      const finalTimer = setTimeout(() => {
         const elapsed = Date.now() - startTime;
         const remaining = Math.max(0, minLoadTime - elapsed);
 
         setTimeout(() => {
-          setProgress(100);
+          setIsLoading(false);
+          setShowWelcome(true);
+
+          // Show welcome for 3 seconds then complete
           setTimeout(() => {
-            setIsLoading(false);
-            setShowWelcome(true);
-
-            // Show welcome for 3 seconds then complete
-            setTimeout(() => {
-              setShowWelcome(false);
-              if (onComplete) {
-                setTimeout(() => onComplete(), 500);
-              }
-            }, 3000);
-          }, 500);
+            setShowWelcome(false);
+            if (onComplete) {
+              setTimeout(() => onComplete(), 500);
+            }
+          }, 3000);
         }, remaining);
-      });
+      }, cumulativeTime);
 
-      return () => clearInterval(progressInterval);
+      // Cleanup timers on unmount
+      return () => {
+        progressTimers.forEach(timer => clearTimeout(timer));
+        clearTimeout(finalTimer);
+      };
     }
   }, [onComplete]);
 
