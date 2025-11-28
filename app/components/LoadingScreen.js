@@ -297,37 +297,53 @@ export default function LoadingScreen({ onComplete }) {
         </div>
 
         <div className="relative z-10 flex flex-col items-center">
-          <div className="relative mb-12 animate-pulse-slow">
-            {/* Glow effects around the logo */}
-            <div className="absolute inset-0 blur-3xl opacity-40 bg-cyan-400 rounded-full scale-150 animate-glow"></div>
-            <div className="absolute inset-0 blur-2xl opacity-60 bg-blue-400 rounded-full scale-125 animate-glow-delayed"></div>
-
-            {/* Interactive logo that responds to mouse movement */}
+          <div className="relative mb-12">
+            {/* Dynamic glow effects that intensify with progress */}
             <div
-              className="relative w-80 h-80 object-contain drop-shadow-2xl animate-float cursor-pointer transition-transform duration-100 ease-out"
+              className="absolute inset-0 rounded-full scale-150"
               style={{
-                filter: 'drop-shadow(0 0 30px rgba(96, 165, 250, 0.8)) drop-shadow(0 0 60px rgba(56, 189, 248, 0.6))',
+                background: `radial-gradient(circle at center,
+                  rgba(56, 189, 248, ${progress / 300}) 0%,
+                  rgba(96, 165, 250, ${progress / 250}) 40%,
+                  transparent 70%)`,
+                opacity: progress / 100,
+                filter: 'blur(40px)',
+                transition: 'all 0.5s ease-out'
               }}
-              onMouseMove={(e) => {
-                const container = e.currentTarget;
-                const rect = container.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+            ></div>
 
-                // Apply subtle movement based on mouse position
-                const xMovement = ((x / rect.width) - 0.5) * 10;
-                const yMovement = ((y / rect.height) - 0.5) * 10;
-
-                container.style.transform = `translate(${xMovement}px, ${yMovement}px) scale(1.05)`;
+            {/* Secondary glow layer for added depth */}
+            <div
+              className="absolute inset-0 rounded-full scale-125"
+              style={{
+                background: `radial-gradient(circle at center,
+                  rgba(139, 92, 246, ${progress / 200}) 0%,
+                  rgba(59, 130, 246, ${progress / 180}) 30%,
+                  transparent 70%)`,
+                opacity: progress / 120,
+                filter: 'blur(30px)',
+                transition: 'all 0.5s ease-out'
               }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translate(0px, 0px) scale(1)';
+            ></div>
+
+            {/* Main logo with dynamic size and enhancements */}
+            <div
+              className="relative w-64 h-64 object-contain"
+              style={{
+                filter: `drop-shadow(0 0 ${10 + progress / 8}px rgba(59, 130, 246, ${0.3 + progress / 200}))
+                         drop-shadow(0 0 ${20 + progress / 5}px rgba(139, 92, 246, ${0.3 + progress / 180}))`,
+                transform: `scale(${0.9 + (progress / 100) * 1.0})`, // Scale from 0.9 to 1.9 as progress goes from 0 to 100
+                transition: 'all 0.5s ease-out'
               }}
             >
               <img
                 src="/loading.png"
                 alt="MU Logo"
                 className="w-full h-full object-contain"
+                style={{
+                  filter: `brightness(${1 + progress / 300}) contrast(${1 + progress / 250})`,
+                  transition: 'filter 0.5s ease-out'
+                }}
               />
             </div>
           </div>
