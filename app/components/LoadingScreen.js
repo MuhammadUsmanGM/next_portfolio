@@ -13,38 +13,137 @@ export default function LoadingScreen({ onComplete }) {
       const minLoadTime = 5000;
       const startTime = Date.now();
 
-      // Define the specific progress sequence
-      const progressSequence = [10, 17, 38, 60, 78, 89, 95, 100];
-      let currentStep = 0;
+      // Start the progress from 0
+      setProgress(0);
 
-      // Set the initial progress
-      setProgress(10);
+      // Create a smooth progress interval that counts from 0 to 100
+      // but adjust the speed based on resource loading
+      let currentProgress = 0;
+      let progressIncrement = 0.5; // Start with a slower increment
 
-      // Schedule the progress updates at specific intervals
-      let cumulativeTime = 500; // Start after initial 10%
-      const progressTimers = [];
+      // Function to preload key images
+      const preloadImage = (src) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = reject;
+          img.src = src;
+        });
+      };
 
-      for (let i = 1; i < progressSequence.length; i++) {
-        // Vary the intervals to make the progression feel natural
-        const interval = (i === 1) ? 500 :  // 10 to 17
-                        (i === 2) ? 700 :  // 17 to 38
-                        (i === 3) ? 1200 :  // 38 to 60 (takes longer for real resources to load)
-                        (i === 4) ? 600 :  // 60 to 78
-                        (i === 5) ? 500 :  // 78 to 89
-                        (i === 6) ? 400 :  // 89 to 95
-                        600;               // 95 to 100
+      // Function to preload video metadata (not the full video)
+      const preloadVideo = (src) => {
+        return new Promise((resolve, reject) => {
+          const video = document.createElement('video');
+          video.preload = 'metadata'; // Only load metadata, not the whole video
 
-        const timer = setTimeout(() => {
-          setProgress(progressSequence[i]);
-          currentStep = i;
-        }, cumulativeTime);
+          const handleCanPlay = () => {
+            video.removeEventListener('loadedmetadata', handleCanPlay);
+            video.removeEventListener('error', handleError);
+            resolve(video);
+          };
 
-        progressTimers.push(timer);
-        cumulativeTime += interval;
-      }
+          const handleError = () => {
+            video.removeEventListener('loadedmetadata', handleCanPlay);
+            video.removeEventListener('error', handleError);
+            reject(new Error(`Failed to load video: ${src}`));
+          };
 
-      // At the end of the sequence, show the welcome screen
-      const finalTimer = setTimeout(() => {
+          video.addEventListener('loadedmetadata', handleCanPlay);
+          video.addEventListener('error', handleError);
+          video.src = src;
+        });
+      };
+
+      // Create an interval that will continuously update the progress
+      const progressInterval = setInterval(() => {
+        currentProgress = Math.min(currentProgress + progressIncrement, 100);
+        setProgress(currentProgress);
+
+        // Speed up progress as resources load
+        if (currentProgress >= 80) {
+          progressIncrement = 2; // Speed up as we approach the end
+        } else if (currentProgress >= 50) {
+          progressIncrement = 1; // Medium speed for middle section
+        } else if (currentProgress >= 20) {
+          progressIncrement = 0.7; // Slightly faster after initial loading
+        }
+      }, 100); // Update every 100ms for smooth animation
+
+      // Preload main logo first and adjust progress when loaded
+      preloadImage('/loading.png')
+        .then(() => {
+          // Increase the increment rate after loading main elements
+          progressIncrement = 0.8;
+        })
+        .catch(error => {
+          console.error('Error preloading main logo:', error);
+        });
+
+      // Preload header and other important images
+      const imagePromises = [
+        preloadImage('/images/grid1.png'),
+        preloadImage('/images/html.svg'),
+        preloadImage('/images/css.svg'),
+        preloadImage('/images/js.png'),
+        preloadImage('/images/react.svg'),
+        preloadImage('/images/next.svg'),
+      ];
+
+      Promise.all(imagePromises)
+        .then(() => {
+          // Increase the increment rate after loading important images
+          progressIncrement = 0.9;
+        })
+        .catch(error => {
+          console.error('Error preloading important images:', error);
+        });
+
+      // Preload additional images
+      const otherImagePromises = [
+        preloadImage('/images/node.svg'),
+        preloadImage('/images/mongodb.svg'),
+        preloadImage('/images/supaBase.png'),
+        preloadImage('/images/git-svgrepo-com.svg'),
+        preloadImage('/images/python.svg'),
+        preloadImage('/images/npm.svg'),
+        preloadImage('/images/openai.svg'),
+        preloadImage('/images/linux.svg'),
+        preloadImage('/images/cpp.svg'),
+        preloadImage('/images/github.png'),
+        preloadImage('/images/tailwindcss.svg'),
+      ];
+
+      Promise.all(otherImagePromises)
+        .then(() => {
+          // Increase the increment rate after loading all images
+          progressIncrement = 1.2;
+        })
+        .catch(error => {
+          console.error('Error preloading other images:', error);
+        });
+
+      // Preload video metadata
+      const videoPromises = [
+        preloadVideo('/videos/hero-video.webm'),
+        preloadVideo('/videos/galaxy.webm'),
+        preloadVideo('/videos/blackhole.webm'),
+      ];
+
+      Promise.all(videoPromises)
+        .then(() => {
+          // Increase the increment rate significantly after loading videos
+          progressIncrement = 2.5;
+        })
+        .catch(error => {
+          console.error('Error preloading videos:', error);
+        });
+
+      // When we reach 100%, clear the interval and finish the loading
+      setTimeout(() => {
+        clearInterval(progressInterval);
+        setProgress(100);
+
         const elapsed = Date.now() - startTime;
         const remaining = Math.max(0, minLoadTime - elapsed);
 
@@ -60,12 +159,11 @@ export default function LoadingScreen({ onComplete }) {
             }
           }, 3000);
         }, remaining);
-      }, cumulativeTime);
+      }, minLoadTime); // Ensure we wait the minimum time
 
-      // Cleanup timers on unmount
+      // Cleanup interval on unmount
       return () => {
-        progressTimers.forEach(timer => clearTimeout(timer));
-        clearTimeout(finalTimer);
+        clearInterval(progressInterval);
       };
     }
   }, [onComplete]);
@@ -77,13 +175,16 @@ export default function LoadingScreen({ onComplete }) {
 
   // Define loading messages that correspond to progress stages
   const getLoadingMessage = (currentProgress) => {
-    if (currentProgress < 10) return "Preparing journey...";
-    if (currentProgress < 17) return "Initializing experience...";
-    if (currentProgress < 38) return "Loading portfolio assets...";
-    if (currentProgress < 60) return "Optimizing resources...";
-    if (currentProgress < 78) return "Preparing interface...";
-    if (currentProgress < 89) return "Finalizing details...";
-    if (currentProgress < 95) return "Almost ready...";
+    if (currentProgress < 10) return "Starting journey...";
+    if (currentProgress < 20) return "Preparing experience...";
+    if (currentProgress < 30) return "Loading assets...";
+    if (currentProgress < 40) return "Initializing systems...";
+    if (currentProgress < 50) return "Gathering resources...";
+    if (currentProgress < 60) return "Optimizing performance...";
+    if (currentProgress < 70) return "Configuring interface...";
+    if (currentProgress < 80) return "Preparing content...";
+    if (currentProgress < 90) return "Finalizing details...";
+    if (currentProgress < 100) return "Almost ready...";
     return "Welcome to my world!";
   };
 
