@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 export default function LoadingScreen({ onComplete }) {
   const [isLoading, setIsLoading] = useState(true);
   const [showWelcome, setShowWelcome] = useState(false);
+  const [showWelcomeTransition, setShowWelcomeTransition] = useState(false);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -148,16 +149,25 @@ export default function LoadingScreen({ onComplete }) {
         const remaining = Math.max(0, minLoadTime - elapsed);
 
         setTimeout(() => {
-          setIsLoading(false);
+          // Show welcome screen at the same time loading screen starts to fade out
+          // This creates an overlap that prevents any black flash
           setShowWelcome(true);
-
-          // Show welcome for 3 seconds then complete
+          // After a moment, start fading out the loading screen
           setTimeout(() => {
-            setShowWelcome(false);
-            if (onComplete) {
-              setTimeout(() => onComplete(), 500);
-            }
-          }, 3000);
+            setIsLoading(false);
+          }, 10); // Very small delay to ensure both are in the transition at the same time
+
+          // Show welcome for 3 seconds then complete with smooth transition
+          setTimeout(() => {
+            // Trigger the zoom-out animation
+            setShowWelcomeTransition(true);
+            // After the animation completes, finish the loading sequence
+            setTimeout(() => {
+              if (onComplete) {
+                onComplete();
+              }
+            }, 1200); // Match the animation duration
+          }, 3000); // Keep original timing for the welcome display
         }, remaining);
       }, minLoadTime); // Ensure we wait the minimum time
 
@@ -192,8 +202,8 @@ export default function LoadingScreen({ onComplete }) {
     <div className="fixed inset-0 z-50">
       {/* Loading Screen */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 flex items-center justify-center overflow-hidden transition-opacity duration-500 ${
-          !isLoading ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        className={`absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 flex items-center justify-center overflow-hidden transition-opacity duration-1000 ${
+          isLoading ? 'opacity-100 z-20' : 'opacity-0 z-0 pointer-events-none'
         }`}
       >
         {/* Enhanced cosmic background with parallax effect */}
@@ -294,7 +304,7 @@ export default function LoadingScreen({ onComplete }) {
 
             {/* Interactive logo that responds to mouse movement */}
             <div
-              className="relative w-64 h-64 object-contain drop-shadow-2xl animate-float cursor-pointer transition-transform duration-100 ease-out"
+              className="relative w-80 h-80 object-contain drop-shadow-2xl animate-float cursor-pointer transition-transform duration-100 ease-out"
               style={{
                 filter: 'drop-shadow(0 0 30px rgba(96, 165, 250, 0.8)) drop-shadow(0 0 60px rgba(56, 189, 248, 0.6))',
               }}
@@ -365,9 +375,9 @@ export default function LoadingScreen({ onComplete }) {
 
       {/* Welcome Screen */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 flex items-center justify-center overflow-hidden transition-all duration-1000 ${
-          showWelcome ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 flex items-center justify-center overflow-hidden transition-opacity duration-1000 ${
+          showWelcome && !showWelcomeTransition ? 'opacity-100 z-30' : 'opacity-0 z-0 pointer-events-none'
+        } ${showWelcomeTransition ? 'animate-welcome-zoom-out' : ''}`}
       >
         {/* Radial glow background */}
         <div className="absolute inset-0">
@@ -400,8 +410,8 @@ export default function LoadingScreen({ onComplete }) {
         </div>
 
         {/* Welcome Text */}
-        <div className="relative z-10 text-center px-8">
-          <div className="animate-welcome-appear space-y-6">
+        <div className="relative z-10 text-center px-8 opacity-100">
+          <div className="space-y-6">
             {/* Top accent line */}
             <div className="flex justify-center mb-8">
               <div className="h-px w-32 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-expand-line"></div>
@@ -418,8 +428,8 @@ export default function LoadingScreen({ onComplete }) {
             </h1>
 
             {/* Muhammad Usman Name */}
-            <div className="mb-6 animate-fade-in-up-delay">
-              <h2 className="text-5xl md:text-7xl font-bold tracking-wide">
+            <div className="mb-6 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+              <h2 className="text-6xl md:text-8xl font-bold tracking-wide">
                 <span className="relative inline-block">
                   <span className="absolute inset-0 blur-sm bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 opacity-40 animate-pulse"></span>
                   <span className="relative bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 text-transparent bg-clip-text">
@@ -430,8 +440,8 @@ export default function LoadingScreen({ onComplete }) {
             </div>
 
             {/* Role - Agentic AI Developer */}
-            <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-              <p className="text-xl md:text-3xl font-light text-cyan-300 mb-8">
+            <div className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+              <p className="text-2xl md:text-4xl font-light text-cyan-300 mb-8">
                 <span className="relative inline-block">
                   <span className="absolute inset-0 blur-[2px] bg-gradient-to-r from-blue-400 to-purple-500 opacity-30"></span>
                   <span className="relative">
@@ -593,6 +603,21 @@ export default function LoadingScreen({ onComplete }) {
 
         .animate-glow {
           animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes welcome-zoom-out {
+          0% {
+            transform: scale(1) translateZ(0);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(1.5) translateZ(0);
+            opacity: 0;
+          }
+        }
+
+        .animate-welcome-zoom-out {
+          animation: welcome-zoom-out 1.2s ease-out forwards;
         }
 
         .animate-glow-delayed {
