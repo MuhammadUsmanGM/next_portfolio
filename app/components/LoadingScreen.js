@@ -418,7 +418,7 @@ export default function LoadingScreen({ onComplete }) {
             </h1>
 
             {/* Muhammad Usman Name */}
-            <div className="mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <div className="mb-6 animate-fade-in-up-delay">
               <h2 className="text-5xl md:text-7xl font-bold tracking-wide">
                 <span className="relative inline-block">
                   <span className="absolute inset-0 blur-sm bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 opacity-40 animate-pulse"></span>
@@ -462,13 +462,13 @@ export default function LoadingScreen({ onComplete }) {
                 return (
                   <div
                     key={`particle-${i}`}
-                    className="absolute rounded-full bg-cyan-400 opacity-30"
+                    className="absolute rounded-full bg-cyan-400 opacity-30 animate-float"
                     style={{
                       left: left + '%',
                       top: top + '%',
                       width: size + 'px',
                       height: size + 'px',
-                      animation: `float ${duration}s infinite`,
+                      animationDuration: `${duration}s`,
                       animationDelay: `${delay}s`,
                     }}
                   />
@@ -477,8 +477,8 @@ export default function LoadingScreen({ onComplete }) {
             </div>
 
             {/* Bottom accent line */}
-            <div className="flex justify-center animate-fade-in" style={{ animationDelay: '0.8s' }}>
-              <div className="h-px w-32 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-expand-line" style={{ animationDelay: '0.8s' }}></div>
+            <div className="flex justify-center animate-fade-in-delay">
+              <div className="h-px w-32 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-expand-line-delay"></div>
             </div>
 
             {/* Decorative elements */}
@@ -574,6 +574,21 @@ export default function LoadingScreen({ onComplete }) {
 
         .animate-pulse {
           animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .animate-fade-in-up-delay {
+          animation: fade-in-up 1s ease-out 0.2s forwards;
+          opacity: 0;
+        }
+
+        .animate-fade-in-delay {
+          animation: fade-in 1s ease-out 0.8s forwards;
+          opacity: 0;
+        }
+
+        .animate-expand-line-delay {
+          animation: expand-line 1s ease-out 0.8s forwards;
+          opacity: 0;
         }
 
         .animate-glow {
