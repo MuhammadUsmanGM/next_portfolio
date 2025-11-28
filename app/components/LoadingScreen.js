@@ -401,14 +401,14 @@ export default function LoadingScreen({ onComplete }) {
 
         {/* Welcome Text */}
         <div className="relative z-10 text-center px-8">
-          <div className="animate-welcome-appear">
+          <div className="animate-welcome-appear space-y-6">
             {/* Top accent line */}
             <div className="flex justify-center mb-8">
               <div className="h-px w-32 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-expand-line"></div>
             </div>
 
             {/* Main welcome text */}
-            <h1 className="text-6xl md:text-8xl font-bold mb-4 relative">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 relative">
               <span className="relative inline-block animate-text-glow">
                 <span className="absolute inset-0 blur-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 opacity-60"></span>
                 <span className="relative bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 text-transparent bg-clip-text animate-gradient">
@@ -417,18 +417,68 @@ export default function LoadingScreen({ onComplete }) {
               </span>
             </h1>
 
+            {/* Muhammad Usman Name */}
+            <div className="mb-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              <h2 className="text-5xl md:text-7xl font-bold tracking-wide">
+                <span className="relative inline-block">
+                  <span className="absolute inset-0 blur-sm bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 opacity-40 animate-pulse"></span>
+                  <span className="relative bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 text-transparent bg-clip-text">
+                    Muhammad Usman
+                  </span>
+                </span>
+              </h2>
+            </div>
+
+            {/* Role - Agentic AI Developer */}
+            <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+              <p className="text-xl md:text-3xl font-light text-cyan-300 mb-8">
+                <span className="relative inline-block">
+                  <span className="absolute inset-0 blur-[2px] bg-gradient-to-r from-blue-400 to-purple-500 opacity-30"></span>
+                  <span className="relative">
+                    Agentic AI Developer
+                  </span>
+                </span>
+              </p>
+            </div>
+
             {/* Subtitle */}
-            <div className="flex items-center justify-center gap-4 mb-8 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+            <div className="flex items-center justify-center gap-4 mb-8 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
               <div className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-400"></div>
-              <p className="text-xl md:text-2xl text-cyan-300 font-light tracking-[0.3em]">
-                TO MY PORTFOLIO
+              <p className="text-lg md:text-xl text-cyan-300 font-light">
+                Crafting Intelligent Experiences
               </p>
               <div className="h-px w-12 bg-gradient-to-l from-transparent to-cyan-400"></div>
             </div>
 
+            {/* Animated particles around the text */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              {[...Array(15)].map((_, i) => {
+                const left = 10 + (i * 6) % 80;
+                const top = 20 + (i * 13) % 60;
+                const size = Math.random() * 3 + 1;
+                const delay = (i * 7) % 5;
+                const duration = 3 + Math.random() * 4;
+
+                return (
+                  <div
+                    key={`particle-${i}`}
+                    className="absolute rounded-full bg-cyan-400 opacity-30"
+                    style={{
+                      left: left + '%',
+                      top: top + '%',
+                      width: size + 'px',
+                      height: size + 'px',
+                      animation: `float ${duration}s infinite`,
+                      animationDelay: `${delay}s`,
+                    }}
+                  />
+                );
+              })}
+            </div>
+
             {/* Bottom accent line */}
-            <div className="flex justify-center animate-fade-in" style={{ animationDelay: '0.6s' }}>
-              <div className="h-px w-32 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-expand-line" style={{ animationDelay: '0.6s' }}></div>
+            <div className="flex justify-center animate-fade-in" style={{ animationDelay: '0.8s' }}>
+              <div className="h-px w-32 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-expand-line" style={{ animationDelay: '0.8s' }}></div>
             </div>
 
             {/* Decorative elements */}
@@ -511,8 +561,19 @@ export default function LoadingScreen({ onComplete }) {
           to { transform: translate(-50%, -50%) rotate(0deg); }
         }
 
+        @keyframes float {
+          0%, 100% { transform: translate(0, 0) rotate(0deg); }
+          25% { transform: translate(-5px, -10px) rotate(5deg); }
+          50% { transform: translate(5px, -5px) rotate(-5deg); }
+          75% { transform: translate(-5px, 5px) rotate(5deg); }
+        }
+
         .animate-float {
           animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-pulse {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
         .animate-glow {
