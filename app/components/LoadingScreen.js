@@ -208,87 +208,87 @@ export default function LoadingScreen({ onComplete }) {
       >
         {/* Enhanced cosmic background with parallax effect */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Distant stars background */}
-          {[...Array(150)].map((_, i) => {
+          {/* Distant stars background with enhanced twinkling */}
+          {[...Array(200)].map((_, i) => {
             const left = (i * 37) % 100;
             const top = (i * 29) % 100;
-            const size = Math.random() * 1.5 + 0.5;
-            const delay = (i * 13) % 15;
-            const duration = (i * 7) % 5 + 5;
-            const opacity = Math.random() * 0.7 + 0.3;
+            const size = Math.random() * 2 + 0.5;
+            const delay = (i * 13) % 20;
+            const duration = (i * 7) % 8 + 3;
+            const opacity = Math.random() * 0.8 + 0.2;
 
             return (
               <div
                 key={`star-${i}`}
-                className="absolute bg-white rounded-full"
+                className="absolute bg-white rounded-full animate-enhanced-twinkle"
                 style={{
                   left: left + '%',
                   top: top + '%',
                   width: size + 'px',
                   height: size + 'px',
                   opacity: opacity,
-                  animation: `twinkle ${duration}s infinite`,
+                  animationDuration: `${duration}s`,
                   animationDelay: `${delay}s`,
                 }}
               />
             );
           })}
 
-          {/* Middle layer cosmic particles */}
-          {[...Array(20)].map((_, i) => {
+          {/* Middle layer cosmic particles with more dynamic movement */}
+          {[...Array(30)].map((_, i) => {
             // Use consistent random values based on index to avoid hydration errors
-            const width = (i * 17) % 100 + 150;
-            const height = (i * 23) % 120 + 180;
+            const width = (i * 17) % 100 + 200;
+            const height = (i * 23) % 120 + 200;
             const left = (i * 37) % 100;
             const top = (i * 29) % 100;
-            const duration = (i * 7) % 10 + 10;
-            const delay = (i * 13) % 5;
+            const duration = (i * 7) % 15 + 15;
+            const delay = (i * 13) % 8;
 
             return (
               <div
                 key={`particle-${i}`}
-                className="absolute rounded-full opacity-10"
+                className="absolute rounded-full opacity-8 animate-enhanced-float"
                 style={{
                   width: width + 'px',
                   height: height + 'px',
                   left: left + '%',
                   top: top + '%',
-                  animation: `float ${duration}s ease-in-out infinite`,
+                  animationDuration: `${duration}s`,
                   animationDelay: `${delay}s`,
-                  background: i % 3 === 0 ? 'radial-gradient(circle, rgba(59, 130, 246, 0.6), transparent 70%)' :
-                              i % 3 === 1 ? 'radial-gradient(circle, rgba(6, 182, 212, 0.6), transparent 70%)' :
-                                          'radial-gradient(circle, rgba(139, 92, 246, 0.6), transparent 70%)',
-                  filter: 'blur(40px)',
-                  transform: `translateZ(${(i % 3) * -10}px)`, // Parallax effect
+                  background: i % 3 === 0 ? 'radial-gradient(circle, rgba(59, 130, 246, 0.5), transparent 70%)' :
+                              i % 3 === 1 ? 'radial-gradient(circle, rgba(6, 182, 212, 0.5), transparent 70%)' :
+                                            'radial-gradient(circle, rgba(139, 92, 246, 0.5), transparent 70%)',
+                  filter: 'blur(60px)',
+                  transform: `translateZ(${(i % 3) * -15}px)`, // Enhanced parallax effect
                 }}
               />
             );
           })}
 
-          {/* Distant nebula effects */}
-          {[...Array(5)].map((_, i) => {
-            const size = 300 + (i * 100);
+          {/* Distant nebula effects with smoother movement */}
+          {[...Array(8)].map((_, i) => {
+            const size = 400 + (i * 100);
             const left = (i * 41) % 100;
             const top = (i * 33) % 100;
-            const duration = 20 + (i * 5);
-            const delay = i * 3;
+            const duration = 25 + (i * 5);
+            const delay = i * 4;
 
             return (
               <div
                 key={`nebula-${i}`}
-                className="absolute rounded-full opacity-5"
+                className="absolute rounded-full opacity-7 animate-enhanced-float"
                 style={{
                   width: size + 'px',
                   height: size + 'px',
                   left: left + '%',
                   top: top + '%',
                   background: `radial-gradient(circle,
-                    ${i % 3 === 0 ? 'rgba(59, 130, 246, 0.3)' :
-                      i % 3 === 1 ? 'rgba(6, 182, 212, 0.3)' :
-                                   'rgba(139, 92, 246, 0.3)'},
+                    ${i % 3 === 0 ? 'rgba(59, 130, 246, 0.25)' :
+                      i % 3 === 1 ? 'rgba(6, 182, 212, 0.25)' :
+                                     'rgba(139, 92, 246, 0.25)'},
                     transparent 70%)`,
-                  filter: 'blur(80px)',
-                  animation: `float ${duration}s ease-in-out infinite`,
+                  filter: 'blur(100px)',
+                  animationDuration: `${duration}s`,
                   animationDelay: `${delay}s`,
                 }}
               />
@@ -326,13 +326,13 @@ export default function LoadingScreen({ onComplete }) {
               }}
             ></div>
 
-            {/* Main logo with dynamic size and enhancements */}
+            {/* Main logo with responsive dynamic size and enhancements */}
             <div
-              className="relative w-64 h-64 object-contain"
+              className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 object-contain"
               style={{
                 filter: `drop-shadow(0 0 ${10 + progress / 8}px rgba(59, 130, 246, ${0.3 + progress / 200}))
                          drop-shadow(0 0 ${20 + progress / 5}px rgba(139, 92, 246, ${0.3 + progress / 180}))`,
-                transform: `scale(${0.9 + (progress / 100) * 1.0})`, // Scale from 0.9 to 1.9 as progress goes from 0 to 100
+                transform: `scale(${0.95 + (progress / 100) * 0.3})`, // Scale more subtly from 0.95 to 1.25 as progress goes from 0 to 100
                 transition: 'all 0.5s ease-out'
               }}
             >
@@ -349,40 +349,43 @@ export default function LoadingScreen({ onComplete }) {
           </div>
 
           {/* Enhanced progress bar with multi-stage visualization */}
-          <div className="w-80 h-3 bg-slate-900 rounded-full overflow-hidden backdrop-blur-sm mb-2 relative border border-slate-700/50 shadow-lg">
+          <div className="w-64 sm:w-72 md:w-80 h-4 bg-slate-900 rounded-full overflow-hidden backdrop-blur-sm mb-2 relative border border-slate-700/50 shadow-lg">
             <div
-              className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-full transition-all duration-300 ease-out relative overflow-hidden"
+              className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-full transition-all duration-500 ease-out relative overflow-hidden"
               style={{ width: `${progress}%` }}
             >
               {/* Animated gradient flow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-40 animate-shimmer"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-50 animate-shimmer"></div>
 
               {/* Progress particles moving along the bar */}
-              {Array.from({ length: Math.floor(progress / 10) }).map((_, idx) => (
+              {Array.from({ length: Math.floor(progress / 8) }).map((_, idx) => (
                 <div
                   key={idx}
-                  className="absolute w-1 h-1 bg-white rounded-full"
+                  className="absolute w-1.5 h-1.5 bg-white rounded-full animate-enhanced-twinkle"
                   style={{
-                    top: '50%',
-                    left: `${(idx * 10) + 5}%`,
+                    top: '-50%',
+                    left: `${(idx * 8) + 4}%`,
                     transform: 'translate(-50%, -50%)',
-                    animation: `twinkle ${1 + Math.random() * 2}s infinite`,
-                    animationDelay: `${Math.random() * 2}s`
+                    animationDuration: `${0.8 + Math.random() * 1.2}s`,
+                    animationDelay: `${Math.random() * 1.5}s`
                   }}
                 />
               ))}
 
               {/* Gradient highlight */}
-              <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white/40 to-transparent"></div>
+              <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white/50 to-transparent"></div>
+
+              {/* Inner glow effect */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent"></div>
             </div>
           </div>
 
-          {/* Progress percentage and status message */}
-          <div className="flex flex-col items-center">
-            <div className="text-cyan-400 text-lg font-mono mb-1">
+          {/* Enhanced progress percentage and status message */}
+          <div className="flex flex-col items-center mt-4">
+            <div className="text-cyan-300 text-2xl font-bold mb-2 font-mono bg-slate-900/50 px-4 py-2 rounded-full border border-cyan-500/30 shadow-lg">
               {Math.round(progress)}%
             </div>
-            <div className="text-slate-300 text-sm italic">
+            <div className="text-slate-200 text-base italic max-w-xs text-center px-4 bg-slate-900/30 py-2 rounded-lg backdrop-blur-sm border border-slate-700/50">
               {getLoadingMessage(progress)}
             </div>
           </div>
@@ -401,24 +404,29 @@ export default function LoadingScreen({ onComplete }) {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500 rounded-full blur-[120px] opacity-30 animate-pulse-glow"></div>
         </div>
 
-        {/* Animated particles */}
+        {/* Enhanced animated particles */}
         <div className="absolute inset-0 overflow-hidden">
-          {[...Array(50)].map((_, i) => {
+          {[...Array(80)].map((_, i) => {
             // Use consistent random values based on index to avoid hydration errors
             const left = (i * 41) % 100;
             const top = (i * 33) % 100;
-            const delay = (i * 19) % 3;
-            const duration = (i * 11) % 2 + 2;
+            const size = Math.random() * 3 + 1; // Random size
+            const delay = (i * 19) % 5; // Spread delays more
+            const duration = (i * 11) % 3 + 2; // 2-4s duration
 
             return (
               <div
                 key={i}
-                className="absolute w-1 h-1 bg-cyan-400 rounded-full animate-twinkle"
+                className="absolute rounded-full bg-gradient-to-b from-cyan-400 to-blue-500 animate-enhanced-twinkle"
                 style={{
                   left: left + '%',
                   top: top + '%',
-                  animationDelay: `${delay}s`,
+                  width: size + 'px',
+                  height: size + 'px',
+                  opacity: Math.random() * 0.7 + 0.3,
                   animationDuration: `${duration}s`,
+                  animationDelay: `${delay}s`,
+                  boxShadow: '0 0 8px rgba(56, 189, 248, 0.7)',
                 }}
               />
             );
@@ -433,33 +441,36 @@ export default function LoadingScreen({ onComplete }) {
               <div className="h-px w-32 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-expand-line"></div>
             </div>
 
-            {/* Main welcome text */}
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 relative">
-              <span className="relative inline-block animate-text-glow">
-                <span className="absolute inset-0 blur-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 opacity-60"></span>
-                <span className="relative bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 text-transparent bg-clip-text animate-gradient">
+            {/* Main welcome text with enhanced entrance */}
+            <h1
+              className="text-5xl md:text-6xl font-bold mb-8 relative opacity-0 animate-text-appear-delay"
+            >
+              <span className="relative inline-block">
+                <span className="absolute inset-0 blur-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 opacity-40 animate-pulse"></span>
+                <span className="relative bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 text-transparent bg-clip-text">
                   WELCOME
                 </span>
               </span>
             </h1>
 
-            {/* Muhammad Usman Name */}
-            <div className="mb-6 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-              <h2 className="text-6xl md:text-8xl font-bold tracking-wide">
-                <span className="relative inline-block">
-                  <span className="absolute inset-0 blur-sm bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 opacity-40 animate-pulse"></span>
-                  <span className="relative bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 text-transparent bg-clip-text">
-                    Muhammad Usman
-                  </span>
+            {/* Muhammad Usman Name with dramatic entrance */}
+            <div
+              className="mb-8 opacity-0 animate-text-appear-delay-2"
+            >
+              <h2 className="text-7xl md:text-9xl font-bold tracking-wide">
+                <span className="relative bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 text-transparent bg-clip-text">
+                  Muhammad Usman
                 </span>
               </h2>
             </div>
 
-            {/* Role - Agentic AI Developer */}
-            <div className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-              <p className="text-2xl md:text-4xl font-light text-cyan-300 mb-8">
+            {/* Role - Agentic AI Developer with enhanced styling */}
+            <div
+              className="opacity-0 animate-text-appear-delay-3"
+            >
+              <p className="text-3xl md:text-5xl font-light text-cyan-300 mb-10 relative">
                 <span className="relative inline-block">
-                  <span className="absolute inset-0 blur-[2px] bg-gradient-to-r from-blue-400 to-purple-500 opacity-30"></span>
+                  <span className="absolute inset-0 blur-[3px] bg-gradient-to-r from-blue-400 to-purple-500 opacity-40"></span>
                   <span className="relative">
                     Agentic AI Developer
                   </span>
@@ -468,34 +479,38 @@ export default function LoadingScreen({ onComplete }) {
             </div>
 
             {/* Subtitle */}
-            <div className="flex items-center justify-center gap-4 mb-8 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-400"></div>
-              <p className="text-lg md:text-xl text-cyan-300 font-light">
+            <div
+              className="flex items-center justify-center gap-6 mb-10 opacity-0 animate-text-appear-delay-4"
+            >
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-cyan-400"></div>
+              <p className="text-xl md:text-2xl text-cyan-300 font-light tracking-wide">
                 Crafting Intelligent Experiences
               </p>
-              <div className="h-px w-12 bg-gradient-to-l from-transparent to-cyan-400"></div>
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-cyan-400"></div>
             </div>
 
-            {/* Animated particles around the text */}
+            {/* Enhanced particles around the text */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              {[...Array(15)].map((_, i) => {
+              {[...Array(25)].map((_, i) => {
                 const left = 10 + (i * 6) % 80;
                 const top = 20 + (i * 13) % 60;
-                const size = Math.random() * 3 + 1;
-                const delay = (i * 7) % 5;
-                const duration = 3 + Math.random() * 4;
+                const size = Math.random() * 4 + 1.5;
+                const delay = (i * 7) % 6;
+                const duration = 4 + Math.random() * 5;
 
                 return (
                   <div
                     key={`particle-${i}`}
-                    className="absolute rounded-full bg-cyan-400 opacity-30 animate-float"
+                    className="absolute rounded-full opacity-40 animate-enhanced-float"
                     style={{
                       left: left + '%',
                       top: top + '%',
                       width: size + 'px',
                       height: size + 'px',
+                      background: 'radial-gradient(circle, rgba(56, 189, 248, 1) 0%, rgba(139, 92, 246, 0.8) 100%)',
                       animationDuration: `${duration}s`,
                       animationDelay: `${delay}s`,
+                      boxShadow: '0 0 10px rgba(56, 189, 248, 0.6)',
                     }}
                   />
                 );
@@ -587,6 +602,30 @@ export default function LoadingScreen({ onComplete }) {
           to { transform: translate(-50%, -50%) rotate(0deg); }
         }
 
+        @keyframes enhancedTwinkle {
+          0%, 100% { opacity: 0.2; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes enhancedFloat {
+          0%, 100% {
+            transform: translate(0, 0) rotate(0deg) scale(1);
+            opacity: 0.08;
+          }
+          25% {
+            transform: translate(-10px, -20px) rotate(5deg) scale(1.05);
+            opacity: 0.12;
+          }
+          50% {
+            transform: translate(10px, -10px) rotate(-5deg) scale(1.1);
+            opacity: 0.15;
+          }
+          75% {
+            transform: translate(-15px, 15px) rotate(3deg) scale(1.08);
+            opacity: 0.1;
+          }
+        }
+
         @keyframes float {
           0%, 100% { transform: translate(0, 0) rotate(0deg); }
           25% { transform: translate(-5px, -10px) rotate(5deg); }
@@ -619,6 +658,45 @@ export default function LoadingScreen({ onComplete }) {
 
         .animate-glow {
           animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes textAppear {
+          0% {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        .animate-text-appear-delay {
+          animation: textAppear 1s ease-out 0.3s forwards;
+        }
+
+        .animate-text-appear-delay-2 {
+          animation: textAppear 1s ease-out 0.6s forwards;
+        }
+
+        .animate-text-appear-delay-3 {
+          animation: textAppear 1s ease-out 0.9s forwards;
+        }
+
+        .animate-text-appear-delay-4 {
+          animation: textAppear 1s ease-out 1.2s forwards;
+        }
+
+        .animate-enhanced-float {
+          animation-name: enhancedFloat;
+          animation-iteration-count: infinite;
+          animation-timing-function: ease-in-out;
+        }
+
+        .animate-enhanced-twinkle {
+          animation-name: enhancedTwinkle;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
         }
 
         @keyframes welcome-zoom-out {
