@@ -13,7 +13,7 @@ export default function Projects() {
       techStack: ["Next.js", "React", "Tailwind CSS", "JavaScript", "CSS", "HTML", "Google Gen AI"],
       features: [
         "AI-powered chatbot assistant",
-        "Interactive tech stack visualization", 
+        "Interactive tech stack visualization",
         "Smooth animations and transitions",
         "Fully responsive design",
         "Performance optimized"
@@ -64,6 +64,25 @@ export default function Projects() {
         "Integrating OpenAI Agent SDK and Tavily"
       ],
       impact: "Provides a modern chat experience with advanced features."
+    },
+    physicalai: {
+      title: "AI-Powered Educational Platform for Physical AI & Robotics",
+      description: "Interactive digital textbook platform for teaching Physical AI, ROS 2, and Humanoid Robotics with intelligent RAG-based chatbot.",
+      fullDescription: "Developed an interactive digital textbook platform for teaching Physical AI, ROS 2, and Humanoid Robotics, featuring an intelligent RAG-based chatbot that serves as a 24/7 teaching assistant. Built during PIAIC hackathon, this project combines comprehensive educational content with advanced AI capabilities.",
+      techStack: ["Docusaurus", "React", "FastAPI", "Python", "Node.js", "Neon Postgres", "Qdrant", "Google Gemini AI", "Better Auth"],
+      features: [
+        "RAG chatbot powered by Google Gemini and Qdrant vector database",
+        "Real-time text selection Q&A for instant AI explanations",
+        "Personalized learning experience with content adjustment",
+        "Multi-step onboarding system with tailored user profiles",
+        "Urdu translation support for improved accessibility"
+      ],
+      challenges: [
+        "Implementing RAG system with vector embeddings and Qdrant",
+        "Creating personalized learning experience based on user skill level",
+        "Integrating real-time text selection Q&A functionality"
+      ],
+      impact: "Enables effective learning of Physical AI and Robotics concepts through AI-powered assistance."
     }
   };
 
@@ -205,6 +224,47 @@ export default function Projects() {
                   </div>
                 </div>
               </div>
+
+              {/* Project 4 - Physical AI */}
+              <div className="project-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="500">
+                <div className="project-vidbox autoBlur">
+                  <video
+                    loop
+                    id="projectVideo4"
+                    data-src="/videos/physical-ai.webm"
+                    muted
+                    playsInline
+                    poster="/images/physical-ai.png"
+                  ></video>
+                  <div className="hover-sign"></div>
+                </div>
+                <div className="project-info fadein-left">
+                  <h1>AI-Powered <span className="gradient">Physical AI</span> Platform</h1>
+                  <p>
+                    Interactive digital textbook platform for teaching Physical AI, ROS 2, and Humanoid Robotics with intelligent RAG-based chatbot.
+                  </p>
+                  <div className="project-buttons">
+                    <a href="https://muhammadusmangm.github.io/physical-ai-hackathon/" target="_blank" rel="noopener noreferrer">
+                      <button
+                        className="project-btn"
+                        data-project="physicalai"
+                      >
+                        <i className="bx bx-link-external"></i> Live Demo
+                      </button>
+                    </a>
+                    <button
+                      className="project-btn project-details-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openProjectDetails('physicalai');
+                      }}
+                      type="button"
+                    >
+                      <i className="bx bx-info-circle"></i> See Details
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
             <button className="nav-btn prev-btn" id="prevProject">
               <i className="bx bx-chevron-left"></i>
@@ -218,6 +278,7 @@ export default function Projects() {
               <span className="indicator active" data-index="0"></span>
               <span className="indicator" data-index="1"></span>
               <span className="indicator" data-index="2"></span>
+              <span className="indicator" data-index="3"></span>
             </div>
           </div>
         </div>
