@@ -209,7 +209,7 @@ const portfolioContext = {
     phone: "+92 325 6550687",
     whatsapp: "https://wa.me/923256550687?text=Hi%20Muhammad%20Usman,%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect!",
     github: "https://github.com/MuhammadUsmanGM",
-    linkedin: "https://www.linkedin.com/in/muhammad-usman-099704390",
+    linkedin: "https://www.linkedin.com/in/muhammad-usman-ai-dev",
     portfolio: "https://portfolio-o4hs.vercel.app/",
     resume: "Available upon request",
     preferredContact: "Email or WhatsApp is the best way to reach me!",

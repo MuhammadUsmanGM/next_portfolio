@@ -33,7 +33,7 @@ export default function Sidebar() {
         >
           <i className="bx bxl-github"></i>
         </a>
-        <a href="https://www.linkedin.com/in/muhammad-usman-099704390" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/muhammad-usman-ai-dev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <i className="bx bxl-linkedin-square"></i>
         </a>
       </div>
